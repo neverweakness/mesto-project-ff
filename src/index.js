@@ -1,19 +1,24 @@
 import "../pages/index.css";
-import { createCard, renderInitialCards } from "./components/card.js";
+import { createCard, deleteCard } from "./components/card.js";
 import { openModal } from "./components/modal.js";
 import { handleFormSubmit } from "./components/form-events.js";
 import { addCards } from "./components/card-actions.js";
+import { initialCards } from "./cards.js";
 
-export const cardTemplate = document.getElementById("card-template");
-export const popupEdit = document.querySelector(".popup_type_edit");
-export const popupAdd = document.querySelector(".popup_type_new-card");
 export const popupImage = document.querySelector(".popup_type_image");
 export const cardsContainer = document.querySelector(".places__list");
-export const editButton = document.querySelector(".profile__edit-button");
-editButton.addEventListener("click", openModal);
 
-export const addButton = document.querySelector(".profile__add-button");
-addButton.addEventListener("click", openModal);
+const popupEdit = document.querySelector(".popup_type_edit");
+const popupAdd = document.querySelector(".popup_type_new-card");
+const editButton = document.querySelector(".profile__edit-button");
+editButton.addEventListener("click", function() {
+  openModal(popupEdit);
+});
+
+const addButton = document.querySelector(".profile__add-button");
+addButton.addEventListener("click", function() {
+  openModal(popupAdd);
+});
 
 export const profileInfo = document.forms["edit-profile"];
 profileInfo.addEventListener("submit", handleFormSubmit);
@@ -21,7 +26,13 @@ profileInfo.addEventListener("submit", handleFormSubmit);
 export const newCardInfo = document.forms["new-place"];
 newCardInfo.addEventListener("submit", addCards);
 
-createCard();
+function renderInitialCards() {
+  initialCards.forEach((card) => {
+    const cardElement = createCard(card.name, card.link, deleteCard, openModal, popupImage);
+    cardsContainer.appendChild(cardElement);
+  });
+}
+
 renderInitialCards();
 
 // В файле index.js должны остаться:
