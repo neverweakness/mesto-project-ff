@@ -8,6 +8,7 @@ export function openModal(currentPopup, imageCard, imageCaption) {
     const currentImage = currentPopup.querySelector(".popup__image");
     const currentCaption = currentPopup.querySelector(".popup__caption");
     currentCaption.textContent = imageCaption;
+    currentImage.alt = imageCaption
     currentImage.src = imageCard.src;
   }
   document.addEventListener("keydown", escapeKeyHandler);
