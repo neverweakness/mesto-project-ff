@@ -1,6 +1,6 @@
-import { newCardInfo, cardsContainer, popupImage } from "../index.js";
+import { newCardInfo, cardsContainer, typeImage, openImagePopup, popupImage, popupImageCaption } from "../index.js";
 import { deleteCard, createCard } from "./card.js";
-import { closeModal, openModal } from "./modal.js";
+import { closeModal } from "./modal.js";
 
 export function addCards(evt) {
   evt.preventDefault();
@@ -10,8 +10,10 @@ export function addCards(evt) {
     titleCard,
     imageCard,
     deleteCard,
-    openModal,
-    popupImage
+    openImagePopup,
+    typeImage,
+    popupImage,
+    popupImageCaption
   );
   cardsContainer.prepend(cardElement);
   closeModal();

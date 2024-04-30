@@ -5,7 +5,9 @@ export function createCard(
   cardLink,
   onDelete,
   openModalCallback,
-  popupImage
+  typeImage,
+  popupImage,
+  popupImageCaption
 ) {
   const clonedElement = cardTemplate.content.cloneNode(true);
   const card = clonedElement.querySelector(".card");
@@ -15,7 +17,7 @@ export function createCard(
   imageCard.src = cardLink;
   imageCard.alt = cardName;
   imageCard.addEventListener("click", function () {
-    openModalCallback(popupImage, imageCard, titleCard.textContent);
+    openModalCallback(imageCard, popupImage, typeImage, popupImageCaption);
   });
   const deleteButton = clonedElement.querySelector(".card__delete-button");
   deleteButton.addEventListener("click", () => onDelete(card));

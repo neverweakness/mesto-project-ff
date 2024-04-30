@@ -5,9 +5,10 @@ import { handleFormSubmit } from "./components/form-events.js";
 import { addCards } from "./components/card-actions.js";
 import { initialCards } from "./cards.js";
 
-export const popupImage = document.querySelector(".popup_type_image");
+export const typeImage = document.querySelector(".popup_type_image");
 export const cardsContainer = document.querySelector(".places__list");
-
+export const popupImageCaption = document.querySelector(".popup__caption");
+export const popupImage = document.querySelector(".popup__image");
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_new-card");
 const editButton = document.querySelector(".profile__edit-button");
@@ -28,12 +29,24 @@ newCardInfo.addEventListener("submit", addCards);
 
 function renderInitialCards() {
   initialCards.forEach((card) => {
-    const cardElement = createCard(card.name, card.link, deleteCard, openModal, popupImage);
+    const cardElement = createCard(card.name, card.link, deleteCard, openImagePopup, typeImage, popupImage, popupImageCaption);
     cardsContainer.appendChild(cardElement);
   });
 }
 
 renderInitialCards();
+
+export function openImagePopup(
+  cardImg,
+  popupImage,
+  typeImage,
+  popupImageCaption
+) {
+  popupImage.src = cardImg.src;
+  popupImage.alt = cardImg.alt;
+  popupImageCaption.textContent = popupImage.alt;
+  openModal(typeImage);
+}
 
 // В файле index.js должны остаться:
 // объявления и инициализация глобальных констант и переменных с DOM-элементами страницы,

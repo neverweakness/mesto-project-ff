@@ -1,16 +1,9 @@
 import { updateFormValues } from "./form-events.js";
 
-export function openModal(currentPopup, imageCard, imageCaption) {
+export function openModal(currentPopup) {
   currentPopup.classList.add("popup_is-opened");
-  currentPopup.addEventListener("click", overlayClickHandler);
+  currentPopup.addEventListener("click", handleOverlayClick);
   updateFormValues();
-  if (imageCard) {
-    const currentImage = currentPopup.querySelector(".popup__image");
-    const currentCaption = currentPopup.querySelector(".popup__caption");
-    currentCaption.textContent = imageCaption;
-    currentImage.alt = imageCaption
-    currentImage.src = imageCard.src;
-  }
   document.addEventListener("keydown", escapeKeyHandler);
 }
 
@@ -20,12 +13,12 @@ export function closeModal() {
   document.removeEventListener("keydown", escapeKeyHandler);
 }
 
-function overlayClickHandler(evt) {
+function handleOverlayClick(evt) {
+  evt.target.removeEventListener("click", handleOverlayClick);
   if (
     evt.target.classList.value.includes("popup_is-opened") ||
     evt.target.classList.value.includes("popup__close")
   ) {
-    evt.target.removeEventListener("click", overlayClickHandler);
     closeModal();
   }
 }
