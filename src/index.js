@@ -1,7 +1,7 @@
 import "../pages/index.css";
 import { createCard, deleteCard } from "./components/card.js";
 import { openModal } from "./components/modal.js";
-import { handleFormSubmit } from "./components/form-events.js";
+import { handleFormSubmit, updateFormValues } from "./components/form-events.js";
 import { addCards } from "./components/card-actions.js";
 import { initialCards } from "./cards.js";
 
@@ -18,6 +18,7 @@ editButton.addEventListener("click", function() {
 
 const addButton = document.querySelector(".profile__add-button");
 addButton.addEventListener("click", function() {
+  updateFormValues()
   openModal(popupAdd);
 });
 
@@ -47,7 +48,6 @@ export function openImagePopup(
   popupImageCaption.textContent = popupImage.alt;
   openModal(typeImage);
 }
-
 // В файле index.js должны остаться:
 // объявления и инициализация глобальных констант и переменных с DOM-элементами страницы,
 // обработчики событий (при открытии и закрытии попапов; при отправке форм; обработчик, открывающий попап при клике по изображению карточки);
