@@ -1,37 +1,60 @@
-const cardTemplate = document.getElementById("card-template");
-
-export function createCard(
-  cardName,
-  cardLink,
+const createCard = ({
+  currentUserId,
+  template,
+  data,
   onDelete,
-  openModalCallback,
-  typeImage,
-  popupImage,
-  popupImageCaption
-) {
-  const clonedElement = cardTemplate.content.cloneNode(true);
-  const card = clonedElement.querySelector(".card");
-  const titleCard = clonedElement.querySelector(".card__title");
-  titleCard.textContent = cardName;
-  const imageCard = clonedElement.querySelector(".card__image");
-  imageCard.src = cardLink;
-  imageCard.alt = cardName;
-  imageCard.addEventListener("click", function () {
-    openModalCallback(imageCard, popupImage, typeImage, popupImageCaption);
+  onLike,
+  onImageClick,
+}) => {
+  const element = template.querySelector('.card').cloneNode(true);
+
+  const image = element.querySelector('.card__image');
+  image.addEventListener('click', () =>
+    onImageClick({
+      cardName: data.name,
+      cardLink: data.link,
+    })
+  );
+  image.src = data.link;
+  image.alt = data.name;
+
+  element.querySelector('.card__title').textContent = data.name;
+
+  const counter = element.querySelector('.card__like-counter');
+  
+  if (data.likes.length) {
+    counter.classList.add('card__like-counter_is-active');
+    counter.textContent = data.likes.length;
+  }
+
+  const deleteButton = element.querySelector('.card__delete-button');
+
+  if (data.owner['_id'] === currentUserId) {
+    deleteButton.classList.add('card__delete-button_is-active');
+    deleteButton.addEventListener('click', () => {
+      onDelete({
+        cardId: data['_id'],
+        cardElement: element,
+        buttonElement: deleteButton,
+      });
+    });
+  }
+
+  const likeButton = element.querySelector('.card__like-button');
+
+  if (data.likes.find((element) => element['_id'] === currentUserId)) {
+    likeButton.classList.add('card__like-button_is-active');
+  }
+
+  likeButton.addEventListener('click', () => {
+    onLike({
+      cardId: data['_id'],
+      buttonElement: likeButton,
+      counterElement: counter,
+    });
   });
-  const deleteButton = clonedElement.querySelector(".card__delete-button");
-  deleteButton.addEventListener("click", () => onDelete(card));
-  const likeButton = clonedElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", likeCard);
-  return clonedElement;
-}
 
-export function deleteCard(card) {
-  card.remove();
-}
+  return element;
+};
 
-function likeCard(event) {
-  const card = event.target.closest(".card");
-  const likeButton = card.querySelector(".card__like-button");
-  likeButton.classList.add("card__like-button_is-active");
-}
+export { createCard };

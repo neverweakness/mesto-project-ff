@@ -1,6 +1,7 @@
-import { newCardInfo, cardsContainer, typeImage, openImagePopup, popupImage, popupImageCaption } from "../index.js";
-import { deleteCard, createCard } from "./card.js";
+import { newCardInfo, cardsContainer, typeImage, openImagePopup, popupImage, popupImageCaption, profileForm, validationConfig } from "../index.js";
+import { createCard } from "./card.js";
 import { closeModal } from "./modal.js";
+import { clearValidation } from "./validation.js";
 
 export function addCards(evt) {
   evt.preventDefault();
@@ -17,5 +18,6 @@ export function addCards(evt) {
   );
   cardsContainer.prepend(cardElement);
   closeModal();
+  clearValidation(profileForm, validationConfig);
   evt.target.reset();
 }
