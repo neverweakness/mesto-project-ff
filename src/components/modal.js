@@ -6,7 +6,6 @@ export function openModal(currentPopup) {
 
 export function closeModal() {
   const currentPopup = document.querySelector(".popup_is-opened");
-  console.log(currentPopup)
   currentPopup.classList.remove("popup_is-opened");
   document.removeEventListener("keydown", escapeKeyHandler);
   currentPopup.removeEventListener("click", handleOverlayClick);

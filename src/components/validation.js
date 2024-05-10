@@ -143,7 +143,6 @@ const clearValidation = (
     errorClass,
   }
 ) => {
-  console.log(submitButtonSelector)
   const inputList = [...formElement.querySelectorAll(inputSelector)];
   const submitButtonElement = formElement.querySelector(submitButtonSelector);
 

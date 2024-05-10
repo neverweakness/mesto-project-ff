@@ -5,6 +5,8 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Security-Policy"
+          content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: 'unsafe-inline'; connect-src * 'unsafe-inline'; frame-src *; font-src * data:;">
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -14,11 +16,11 @@
   </header>
   <main class="content">
     <section class="profile page__section">
-      <div class="profile__image" style="background-image: url(<%=require('../images/avatar-black.jpg')%>);"></div>
+      <button type="button" class="profile__image"></button>
       <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
+        <h1 class="profile__title"></h1>
         <button class="profile__edit-button" type="button"></button>
-        <p class="profile__description">Исследователь океана</p>
+        <p class="profile__description"></p>
       </div>
       <button class="profile__add-button" type="button"></button>
     </section>
@@ -46,7 +48,7 @@
           minlength="2"
           maxlength="40"
           pattern="[A-Za-zА-Яа-яЁё]+([\s\-][A-Za-zА-Яа-яЁё]+)*"
-          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+          data-error-message="Разрешены только кириллические, латинские буквы, знаки пробела и дефиса"
           required
         />
         <span class="name-input-error popup__error"></span>
@@ -60,11 +62,31 @@
           minlength="2"
           maxlength="200"
           pattern="[A-Za-zА-Яа-яЁё]+([\s\-][A-Za-zА-Яа-яЁё]+)*"
-          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+          data-error-message="Разрешены только кириллические, латинские буквы, знаки пробела и дефиса"
           required
         />
         <span class="description-input-error popup__error"></span>
         <span class="form__input-error email-input-error"></span>
+        <button type="submit" class="button popup__button">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <form class="popup__form" name="edit-avatar">
+        <input
+          type="url"
+          name="avatar"
+          class="popup__input popup__input_type_url"
+          placeholder="Ссылка на картинку"
+          required
+          id="avatar-input"
+        />
+        <span class="avatar-input-error popup__error"></span>
         <button type="submit" class="button popup__button">
           Сохранить
         </button>
@@ -111,6 +133,17 @@
       <p class="popup__caption"></p>
     </div>
   </div>
+  <div class="popup popup_type_confirm">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Вы уверены?</h3>
+      <button
+        type="button"
+        class="button popup__button popup__button_confirm"
+      >
+        Да
+      </button>
+    </div>
 </div>
 
 <template id="card-template">
