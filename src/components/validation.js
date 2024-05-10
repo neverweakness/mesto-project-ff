@@ -24,7 +24,7 @@ const hideInputError = ({
 }) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   errorElement.classList.remove(errorClass);
-  errorElement.textContent = '';
+  errorElement.textContent = "";
 
   inputElement.classList.remove(inputErrorClass);
 };
@@ -38,7 +38,7 @@ const checkInputValidity = ({
   if (inputElement.validity.patternMismatch) {
     inputElement.setCustomValidity(inputElement.dataset.errorMessage);
   } else {
-    inputElement.setCustomValidity('');
+    inputElement.setCustomValidity("");
   }
 
   if (!inputElement.validity.valid) {
@@ -91,7 +91,7 @@ const setEventListeners = ({
   });
 
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', () => {
+    inputElement.addEventListener("input", () => {
       checkInputValidity({
         formElement,
         inputElement,
@@ -118,7 +118,7 @@ const enableValidation = ({
   const formList = document.querySelectorAll(formSelector);
 
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (event) => {
+    formElement.addEventListener("submit", (event) => {
       event.preventDefault();
     });
 

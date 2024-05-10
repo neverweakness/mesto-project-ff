@@ -38,7 +38,8 @@ const popupConfirm = document.querySelector(".popup_type_confirm");
 const popupConfirmButton = popupConfirm.querySelector(".popup__button_confirm");
 const profileImageForm = document.forms["edit-avatar"];
 const profileImageInput = profileImageForm.elements.avatar;
-const profileImageFormSubmitButton = profileImageForm.querySelector(".popup__button");
+const profileImageFormSubmitButton =
+  profileImageForm.querySelector(".popup__button");
 const profileImage = document.querySelector(".profile__image");
 const popupProfileImage = document.querySelector(".popup_type_edit-avatar");
 profileImageForm.addEventListener("submit", handleProfileImageFormSubmit);
@@ -242,14 +243,7 @@ const handleProfileFormSubmit = (event) => {
     });
 };
 
-
-
-function openImagePopup(
-  cardImg,
-  popupImage,
-  typeImage,
-  popupImageCaption
-) {
+function openImagePopup(cardImg, popupImage, typeImage, popupImageCaption) {
   popupImage.src = cardImg.src;
   popupImage.alt = cardImg.alt;
   popupImageCaption.textContent = popupImage.alt;
