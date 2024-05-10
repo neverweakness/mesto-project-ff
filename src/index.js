@@ -250,10 +250,7 @@ function openImagePopup(cardImg, popupImage, typeImage, popupImageCaption) {
   openModal(typeImage);
 }
 
-const forms = document.querySelectorAll(".popup__form");
-forms.forEach((form) => {
-  enableValidation(validationConfig);
-});
+enableValidation(validationConfig);
 
 const setProfile = ({ name, description, avatar }) => {
   authorName.textContent = name;

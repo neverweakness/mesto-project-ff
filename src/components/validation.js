@@ -154,7 +154,7 @@ const clearValidation = (
       errorClass,
     });
   });
-
+  formElement.reset()
   toggleButtonState({
     inputList,
     submitButtonElement,

@@ -22,6 +22,6 @@ function handleOverlayClick(evt) {
 
 function escapeKeyHandler(evt) {
   if (evt.key === "Escape") {
-    closeModal(evt);
+    closeModal();
   }
 }
